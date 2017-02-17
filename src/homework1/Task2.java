@@ -12,6 +12,7 @@ public class Task2 {
         int b = scanner.nextInt();
         int c = scanner.nextInt();
         int d = scanner.nextInt();
+        scanner.close();
 
         boolean flag = false;
 
