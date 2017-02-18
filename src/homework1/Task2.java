@@ -14,25 +14,37 @@ public class Task2 {
         int d = scanner.nextInt();
         scanner.close();
 
-        boolean flag = false;
-
-        if ((e > b + d) && f >= Math.max(a, c) || (f > b + d) && e >= Math.max(a, c)) {
-            flag = true;
-        }
-        if ((e > b + c) && f >= Math.max(a, d) || (f > b + c) && e >= Math.max(a, d)) {
-            flag = true;
-        }
-        if ((e > a + d) && f >= Math.max(b, c) || (f > a + d) && e >= Math.max(b, c)) {
-            flag = true;
-        }
-        if ((e > a + c) && f >= Math.max(b, d) || (f > a + c) && e >= Math.max(b, d)) {
-            flag = true;
-        }
-
-        if (flag) {
+        if (isHousesPlaced(a, b, c, d)) {
             System.out.println("Дома помещаются");
         } else {
             System.out.println("Дома не помещаются");
         }
+    }
+
+    public static boolean isHousesPlaced(int a, int b, int c, int d) {
+        int sum = b + d;
+        int max = Math.max(a, c);
+        if ((e > sum) && f >= max || (f > sum) && e >= max) {
+            return true;
+        } else {
+            sum = b + c;
+            max= Math.max(a, d);
+            if ((e > sum) && f >= max || (f > sum) && e >= max) {
+                return true;
+            } else {
+                sum = a + d;
+                max = Math.max(b, c);
+                if ((e > sum) && f >= max || (f > sum) && e >= max) {
+                    return true;
+                } else {
+                    sum = a + c;
+                    max = Math.max(b, d);
+                    if ((e > sum) && f >= max || (f > sum) && e >= max) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
