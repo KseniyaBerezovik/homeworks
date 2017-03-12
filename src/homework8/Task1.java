@@ -1,9 +1,6 @@
 package homework8;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Task1 {
     public static String TEXT = "Java is a general-purpose computer programming language " +
@@ -11,18 +8,9 @@ public class Task1 {
 
     public static void main(String[] args) {
         List<String> words = Arrays.asList(TEXT.split(" "));
-        Map<String, Integer> map = new HashMap<>();
 
-        for (String word : words) {
-            if (map.containsKey(word)) {
-                map.put(word, map.get(word) + 1);
-            } else {
-                map.put(word, 1);
-            }
-        }
-
-        for (String key : map.keySet()) {
-            System.out.println(key + " - " + map.get(key));
+        for (String s : new HashSet<>(words)) {
+            System.out.println(s + " - " + Collections.frequency(words, s));
         }
     }
 }
