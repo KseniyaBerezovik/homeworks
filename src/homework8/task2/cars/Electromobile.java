@@ -33,7 +33,7 @@ public class Electromobile extends Car {
     @Override
     public String toString() {
         return "Electromobile{" + super.toString() +
-                "battery capacity=" + batteryCapacity +
+                " battery capacity=" + batteryCapacity +
                 '}';
     }
 }

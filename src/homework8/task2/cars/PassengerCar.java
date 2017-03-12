@@ -33,7 +33,7 @@ public class PassengerCar extends Car {
     @Override
     public String toString() {
         return "PassengerCar{" + super.toString() +
-                "body type='" + bodyType + '\'' +
+                " body type='" + bodyType + '\'' +
                 '}';
     }
 }

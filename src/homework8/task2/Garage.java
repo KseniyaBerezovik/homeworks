@@ -6,20 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Garage {
-    private Map<Car, Integer> cars = new HashMap<>();
+    private static Map<Car, Integer> cars = new HashMap<>();
 
-    public void park(Car car) {
+    public static void park(Car car) {
         if (cars.containsKey(car)) {
             cars.put(car, cars.get(car) + 1);
         } else {
             cars.put(car, 1);
         }
-        System.out.println(car.getClass().getSimpleName() + " park in garage");
     }
 
-    public void leave(Car car) {
+    public static void leave(Car car) {
         if (!cars.containsKey(car)) {
-            System.out.println("This car is not in the garage");
+            System.out.println("This car isn't in the garage");
             return;
         }
         if (cars.get(car) == 1) {
@@ -27,24 +26,24 @@ public class Garage {
         } else {
             cars.put(car, cars.get(car) - 1);
         }
-        System.out.println(car.getClass().getSimpleName() + " to leave garage");
-
+        System.out.println(car.getClass().getSimpleName() + " has left the garage");
     }
 
-    public int getNumberEqualCars(Car car) {
-        if(!cars.containsKey(cars)) {
-            return 0;
-        }
-        return cars.get(car);
-    }
-
-    public int getNumberSpecificTypeCars (String type) throws ClassNotFoundException {
+    public static int getNumberOfCarsOfCertainType(TypesOfCar type) {
         int count = 0;
         for (Car car : cars.keySet()) {
-            if (car.getClass().getSimpleName().equalsIgnoreCase(type)) {
+            if (car.getClass().getSimpleName().equals(type.toString())) {
                 count += cars.get(car);
             }
         }
         return count;
+    }
+
+    public static void printCars() {
+        System.out.println();
+        for (Map.Entry<Car, Integer> entry : cars.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
+        System.out.println();
     }
 }

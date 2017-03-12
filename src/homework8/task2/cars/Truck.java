@@ -8,6 +8,10 @@ public class Truck extends Car {
         this.carryingCapacity = carryingCapacity;
     }
 
+    public int getCarryingCapacity() {
+        return carryingCapacity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -17,10 +21,6 @@ public class Truck extends Car {
         Truck truck = (Truck) o;
 
         return carryingCapacity == truck.carryingCapacity;
-    }
-
-    public int getCarryingCapacity() {
-        return carryingCapacity;
     }
 
     @Override

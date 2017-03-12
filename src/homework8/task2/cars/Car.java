@@ -17,38 +17,22 @@ public abstract class Car {
         return brand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public int getYearOfIssue() {
         return yearOfIssue;
     }
 
-    public void setYearOfIssue(int yearOfIssue) {
-        this.yearOfIssue = yearOfIssue;
-    }
-
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof Car)) return false;
+        if (!(o instanceof Car)) return false;
 
         Car car = (Car) o;
 
