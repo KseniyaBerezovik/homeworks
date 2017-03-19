@@ -1,39 +1,53 @@
 package homework9.task2;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.nio.file.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Task2 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         File directory = new File("src" + File.separator + "homework9" + File.separator + "task2");
-        File original = new File(directory, "originalNumbers.txt");
-        File result = new File(directory, "resultNumbers.txt");
-        original.createNewFile();
-        result.createNewFile();
-        List<Integer> numbers = new ArrayList<>();
-        Random random = new Random();
+        File numbersFile = new File(directory, "numbers.txt");
+        numbersFile.createNewFile();
 
-        try(Writer writer = new BufferedWriter(new FileWriter(original));
-            Writer resultWriter = new BufferedWriter(new FileWriter(result))) {
-            for(int i = 0; i < random.nextInt(100 + 1); i++) {
-                int nextRandom = random.nextInt(1000);
-                writer.write( nextRandom + "\n");
-                numbers.add(nextRandom);
+        writeToFile(numbersFile, getRandomList());
+
+        List<Integer> sortedList = Files
+                .lines(numbersFile.toPath())
+                .map(Integer::parseInt)
+                .sorted()
+                .collect(Collectors.toList());
+
+        File tempFile = new File(directory, "temp.txt");
+
+        writeToFile(tempFile, sortedList);
+
+        numbersFile.delete();
+
+        //tempFile.renameTo(numbersFile);
+        //Files.move(tempFile.toPath(), tempFile.toPath().resolveSibling(numbersFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+        //Files.move(tempFile.toPath(), directory.toPath().resolve(numbersFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+
+        Files.move(tempFile.toPath(), tempFile.toPath().resolveSibling("mockNumbers.txt"), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public static void writeToFile(File file, List<Integer> list) {
+        try (Writer writer = new PrintWriter(file)) {
+            for (Integer i : list) {
+                writer.write(i + "\n");
             }
-
-            Collections.sort(numbers);
-
-            for(Integer i : numbers) {
-                resultWriter.write(i + "\n");
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        original.delete();
-        result.renameTo(original);
+    }
+
+    public static List<Integer> getRandomList() {
+        List<Integer> randomList = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < random.nextInt(100 + 1); i++) {
+            randomList.add(random.nextInt(1000));
+        }
+        return randomList;
     }
 }
